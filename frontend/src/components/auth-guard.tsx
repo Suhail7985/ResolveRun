@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { api, User } from "@/lib/api";
 import { isOnboardingComplete } from "@/lib/onboarding";
+import { DEMO_EMAIL } from "@/lib/demo-account";
 import { AppSidebar } from "./layout/app-sidebar";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -21,7 +22,8 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
       }
       setUser(res.data);
 
-      const onboarded = isOnboardingComplete(res.data.id);
+      const onboarded =
+        res.data.email === DEMO_EMAIL || isOnboardingComplete(res.data.id);
       const onOnboarding = pathname.startsWith("/onboarding");
 
       if (!onboarded && !onOnboarding) {

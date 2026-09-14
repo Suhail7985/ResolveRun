@@ -30,7 +30,7 @@ export default function RegisterPage() {
       setError(res.error);
       return;
     }
-    if (res.data) router.push(postAuthPath(res.data.id));
+    if (res.data) router.push(postAuthPath(res.data));
     else router.push("/onboarding");
   }
 
