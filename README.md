@@ -4,6 +4,8 @@
 
 Job automation platform for HTTP workloads with PostgreSQL-backed execution state, Redis/BullMQ delivery, multiple workers, scheduler deduplication, and **UNKNOWN** outcome handling for risky side effects.
 
+**Live app:** [https://resolve-run.vercel.app](https://resolve-run.vercel.app)
+
 ## Product Overview
 
 Authenticated users create HTTP jobs with risk levels (LOW/MEDIUM/HIGH), schedules, and manual runs. Workers execute asynchronously; the UI shows execution timelines, retry decisions, and why automatic retry was blocked.
@@ -125,6 +127,8 @@ docker compose up --build
 
 ## Public deploy (Vercel + Render)
 
+**Live UI:** [https://resolve-run.vercel.app](https://resolve-run.vercel.app)
+
 See **[DEPLOY.md](./DEPLOY.md)**.
 
 - **Frontend:** Vercel, root directory `frontend`, env `API_INTERNAL_URL` = Render API URL  
@@ -179,7 +183,6 @@ npm run test:e2e
 
 - SSRF protection is baseline, not complete.
 - UTC cron only.
-- Public deployment URL is still your responsibility.
 
 ## Future Improvements
 
