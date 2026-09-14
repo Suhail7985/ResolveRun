@@ -1,6 +1,7 @@
 # Deploy: Render (backend) + Vercel (frontend)
 
-Backend URL: **https://resolverun-api.onrender.com**
+Frontend: **[https://resolve-run.vercel.app](https://resolve-run.vercel.app)**  
+Backend: **https://resolverun-api.onrender.com**
 
 The browser talks only to **Vercel**. Vercel proxies `/api` to Render so login cookies work.
 
@@ -19,14 +20,14 @@ The browser talks only to **Vercel**. Vercel proxies `/api` to Render so login c
 Do **not** set `NEXT_PUBLIC_API_URL`. The UI must use `/api/...` on Vercel.
 
 5. Deploy
-6. Copy your Vercel URL (e.g. `https://resolverun.vercel.app`)
+6. Production URL: [https://resolve-run.vercel.app](https://resolve-run.vercel.app/)
 
 ## After Vercel is live
 
 On Render → **resolverun-api** → Environment:
 
 ```text
-CORS_ORIGIN=https://YOUR-APP.vercel.app
+CORS_ORIGIN=https://resolve-run.vercel.app
 ```
 
 Save and **Manual Deploy** Render (or wait for restart).
@@ -34,7 +35,7 @@ Save and **Manual Deploy** Render (or wait for restart).
 ## Check
 
 1. `https://resolverun-api.onrender.com/api/health` → `"status":"ok"` (first hit can be slow)
-2. Open the Vercel site → landing → Sign up
+2. Open [https://resolve-run.vercel.app](https://resolve-run.vercel.app/) → landing → Sign in (or Sign up)
 3. New job URL default is already `https://resolverun-api.onrender.com/api/demo/success`
 4. Run now — wait if Render was sleeping
 

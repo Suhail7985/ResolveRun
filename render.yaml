@@ -38,6 +38,6 @@ services:
       - key: AUTH_SECRET
         generateValue: true
       - key: CORS_ORIGIN
-        sync: false
+        value: https://resolve-run.vercel.app
       - key: WORKER_ID
         value: worker-render-1
