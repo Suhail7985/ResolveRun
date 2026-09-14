@@ -20,7 +20,7 @@ services:
     plan: free
     rootDir: backend
     region: oregon
-    buildCommand: npm ci && npx prisma generate && npm run build
+    buildCommand: npm ci --include=dev && npx prisma generate && npm run build
     startCommand: npx prisma migrate deploy && node scripts/start-all.mjs
     healthCheckPath: /api/health
     envVars:

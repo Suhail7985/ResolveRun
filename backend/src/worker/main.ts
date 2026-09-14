@@ -1,4 +1,4 @@
-import { Worker } from "bullmq";
+import { Job, Worker } from "bullmq";
 import { loadConfig } from "../lib/config.js";
 import { claimExecutionById } from "../lib/claim.js";
 import { log } from "../lib/logger.js";
@@ -78,7 +78,7 @@ async function start(): Promise<void> {
 
   const executionWorker = new Worker<{ executionId: string }>(
     EXECUTION_QUEUE_NAME,
-    async (job) => {
+    async (job: Job<{ executionId: string }>) => {
       await handleExecutionJob(job.data.executionId, config.WORKER_ID, config.WORKER_HEARTBEAT_MS);
     },
     workerOpts
@@ -87,7 +87,7 @@ async function start(): Promise<void> {
 
   const retryWorker = new Worker<{ executionId: string }>(
     RETRY_QUEUE_NAME,
-    async (job) => {
+    async (job: Job<{ executionId: string }>) => {
       await handleExecutionJob(job.data.executionId, config.WORKER_ID, config.WORKER_HEARTBEAT_MS);
     },
     workerOpts
@@ -96,7 +96,7 @@ async function start(): Promise<void> {
 
   const verificationWorker = new Worker<{ executionId: string }>(
     VERIFICATION_QUEUE_NAME,
-    async (job) => {
+    async (job: Job<{ executionId: string }>) => {
       try {
         await runVerification(job.data.executionId);
       } catch (err) {

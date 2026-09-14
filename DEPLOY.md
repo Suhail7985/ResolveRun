@@ -31,7 +31,7 @@ CORS_ORIGIN=https://YOUR-APP.vercel.app
 
 Free Render web services **spin down** after idle time. The first request after sleep can take 30–60s. Workers run on the same service via `scripts/start-all.mjs`.
 
-If Prisma fails on SSL, append to `DATABASE_URL`:
+If the **TypeScript** build fails on Render (`Cannot find name 'process'`), the service is skipping devDependencies. The blueprint uses `npm ci --include=dev` so types are installed at build time. Push this change and **Manual Deploy**.
 
 ```text
 ?sslmode=require
