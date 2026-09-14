@@ -1,0 +1,24 @@
+{
+  "name": "resolverun",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:api": "npm run dev:api --prefix backend",
+    "dev:worker": "npm run dev:worker --prefix backend",
+    "dev:scheduler": "npm run dev:scheduler --prefix backend",
+    "dev:web": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix backend && npm run build --prefix frontend",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
+    "typecheck": "npm run typecheck --prefix backend && npm run typecheck --prefix frontend",
+    "test": "node scripts/run-tests.mjs",
+    "test:unit": "npm run test --prefix backend",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install chromium",
+    "db:status": "npm exec prisma migrate status --prefix backend",
+    "db:migrate": "npm exec prisma migrate deploy --prefix backend"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

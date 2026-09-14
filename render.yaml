@@ -1,0 +1,43 @@
+# ResolveRun — Render backend (API + worker + scheduler + Postgres + Redis)
+# Dashboard: New → Blueprint → connect this GitHub repo.
+
+databases:
+  - name: resolverun-db
+    plan: free
+    databaseName: resolverun
+    user: resolverun
+
+services:
+  - type: redis
+    name: resolverun-redis
+    plan: free
+    maxmemoryPolicy: noeviction
+    ipAllowList: []
+
+  - type: web
+    name: resolverun-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    region: oregon
+    buildCommand: npm ci && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && node scripts/start-all.mjs
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resolverun-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: resolverun-redis
+          property: connectionString
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        sync: false
+      - key: WORKER_ID
+        value: worker-render-1
